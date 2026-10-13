@@ -6,6 +6,7 @@ class Student(Person):
         self.set_id_student(id_student)
         self.set_academic_program(academic_program)
         self.set_semester(semester)
+        self.set_cumulative_GPA(cumulative_GPA)
         
     def get_id_student(self):
         return self.__id_student
@@ -36,3 +37,13 @@ class Student(Person):
         
         else:
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe el número del semestre que estás cursando.")
+        
+    def get_cumulative_GPA(self):
+        return self.__cumulative_GPA
+    
+    def set_cumulative_GPA(self, cumulative_GPA):
+        if(cumulative_GPA is not None and isinstance(cumulative_GPA, float) and 0.0 <= cumulative_GPA <= 5.0):
+            self.__cumulative_GPA = cumulative_GPA
+
+        else:
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu promedio acumulado (debe ser un número entre 0.0 a 5.0)")
