@@ -3,6 +3,7 @@ class Person:
     def __init__(self, identification, name, email):
         self.set_identification(identification)
         self.set_name(name)
+        self.set_email(email)
         
     def get_identification(self):
         return self.__identification
@@ -23,3 +24,14 @@ class Person:
             
         else:
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe un nombre.")
+        
+    def get_email(self):
+        return self.__email
+    
+    def set_email(self, email):
+        if(email is not None and isinstance(email, str) and len(email.strip()) > 0):
+            self.__email = email
+            
+        else:
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe un nombre.")
+        
