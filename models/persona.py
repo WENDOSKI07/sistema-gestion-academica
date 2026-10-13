@@ -35,3 +35,8 @@ class Person:
         else:
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe un nombre.")
         
+    def show_info(self):
+        return f"Identificación: {self.get_identification()} | Nombre: {self.get_name()} | Email: {self.get_email()}"
+    
+    def perform_main_activity(self):
+        return "Realizando una actividad general de la institución."
