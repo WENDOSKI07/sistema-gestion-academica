@@ -1,0 +1,1 @@
+# Se agregarán las dependencias cuando el equipo confirme la librería de interfaz.
