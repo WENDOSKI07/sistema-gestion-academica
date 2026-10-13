@@ -26,7 +26,7 @@ class Student(Person):
             self.__academic_program = academic_program
         
         else:
-            raise ValueError("Este campo no puede estar vacío. Por favor, escribe un programa académico")
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe un programa académico.")
         
     def get_semester(self):
         return self.__semester
@@ -46,7 +46,7 @@ class Student(Person):
             self.__cumulative_GPA = cumulative_GPA
 
         else:
-            raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu promedio acumulado (debe ser un número entre 0.0 a 5.0)")
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu promedio acumulado (debe ser un número entre 0.0 a 5.0).")
         
     def show_info(self):
         return f"{super().show_info()} | ID Estudiante: {self.get_id_student()} | Programa Académico: {self.get_academic_program()} | Semestre: {self.get_semester()} | Promedio acumulado: {self.get_cumulative_GPA()}"

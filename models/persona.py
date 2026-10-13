@@ -13,7 +13,7 @@ class Person:
             self.__identification = identification
             
         else:
-            raise ValueError("Este campo no puede estar vacío. Por favor, escribe una identificación")
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe una identificación.")
         
     def get_name(self):
         return self.__name
