@@ -6,6 +6,7 @@ class Teacher(Person):
         self.set_id_employee(id_employee)
         self.set_deparment(deparment)
         self.set_employment_type(employment_type)
+        self.set_weekly_hours(weekly_hours)
         
     def get_id_employee(self):
         return self.__id_employee
@@ -25,7 +26,7 @@ class Teacher(Person):
             self.__deparment = deparment
         
         else:
-            raise ValueError("Este campo no puede estar vacío, Por favor, escribe  tu facultad.")
+            raise ValueError("Este campo no puede estar vacío, Por favor, escribe tu facultad.")
         
     def get_employment_type(self):
         return self.__employment_type
@@ -35,4 +36,14 @@ class Teacher(Person):
             self.__employment_type = employment_type
             
         else:
-            raise ValueError("Este campo no puede estar vacío, Por favor, escribe  tu tipo de contratación.")
+            raise ValueError("Este campo no puede estar vacío, Por favor, escribe tu tipo de contratación.")
+        
+    def get_weekly_hours(self):
+        return self.__weekly_hours
+    
+    def set_weekly_hours(self, weekly_hours):
+        if(weekly_hours is not None and isinstance(weekly_hours, int) and weekly_hours  > 0):
+            self.__weekly_hours = weekly_hours
+        
+        else:
+            raise ValueError("Este campo no puede estar vacío, Por favor, escribe tus horas semanales.")
