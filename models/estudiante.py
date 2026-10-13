@@ -5,6 +5,7 @@ class Student(Person):
         super().__init__(identification, name, email)
         self.set_id_student(id_student)
         self.set_academic_program(academic_program)
+        self.set_semester(semester)
         
     def get_id_student(self):
         return self.__id_student
@@ -25,3 +26,13 @@ class Student(Person):
         
         else:
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe un programa académico")
+        
+    def get_semester(self):
+        return self.__semester
+    
+    def set_semester(self, semester):
+        if(semester is not None and isinstance(semester, int) and semester > 0):
+            self.__semester = semester
+        
+        else:
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe el número del semestre que estás cursando.")
