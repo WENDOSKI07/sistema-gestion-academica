@@ -30,7 +30,7 @@ class Administrative(Person):
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu dependencia.")
         
     def get_possition(self):
-        return (self.__position)
+        return (self.__possition)
     
     def set_possition(self, possition):
         if(possition is not None and isinstance(possition, str) and len(possition.strip()) > 0):
@@ -54,5 +54,3 @@ class Administrative(Person):
     
     def perform_main_activity(self):
         return f"Desempeño el cargo de {self.get_possition()} y trabajo en el departamento de {self.get_deparment()}."
-    
-    
