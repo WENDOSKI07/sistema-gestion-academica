@@ -7,6 +7,7 @@ class Administrative(Person):
         self.set_id_employee(id_employee)
         self.set_deparment(deparment)
         self.set_possition(possition)
+        self.set_work_schedule(work_schedule)
         
     def get_id_employee(self):
         return self.__id_employee
@@ -38,7 +39,15 @@ class Administrative(Person):
         else:
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu cargo.")
     
+    def get_work_schedule(self):
+        return self.__work_schedule
     
+    def set_work_schedule(self, work_schedule):
+        if(work_schedule is not None and isinstance(work_schedule, str) and len(work_schedule.strip()) > 0):
+            self.__work_schedule = work_schedule
+            
+        else:
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu jornada.")
 
     
     
