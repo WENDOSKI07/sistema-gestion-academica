@@ -1,5 +1,6 @@
 from models.estudiante import Student
 from models.docente import Teacher
+from models.administrativo import Administrative
 from controllers.menu_controller import MenuController
 from controllers.estudiante_controller import EstudianteController
 from controllers.docente_controller import DocenteController
@@ -52,11 +53,37 @@ def crear_personas_ejemplo():
         weekly_hours=20,
     )
 
+    # Agregamos dos administrativos usando la clase que hizo nuestra compañera
+    administrativo_1 = Administrative(
+        identification="P005",
+        name="Laura Díaz",
+        email="laura@example.com",
+        id_employee="ADM001",
+        deparment="Registro Académico",
+        possition="Auxiliar",
+        work_schedule="Diurna",
+    )
+
+    administrativo_2 = Administrative(
+        identification="P006",
+        name="Pedro León",
+        email="pedro@example.com",
+        id_employee="ADM002",
+        deparment="Bienestar Universitario",
+        possition="Coordinador",
+        work_schedule="Diurna",
+    )
+
     estudiantes = [estudiante_1, estudiante_2]
     docentes = [docente_1, docente_2]
     # Las listas específicas apuntan a los mismos objetos del reporte general
     # Sirven para elegir a quién actualizar, el reporte sigue usando una sola lista
-    personas = [estudiante_1, docente_1, estudiante_2, docente_2]
+    # Reunimos los seis objetos para consultar sus datos y actividades
+    # con los mismos métodos sin separarlos por tipo en el reporte
+    personas = [
+        estudiante_1, docente_1, administrativo_1,
+        estudiante_2, docente_2, administrativo_2,
+    ]
     return personas, estudiantes, docentes
 
 
