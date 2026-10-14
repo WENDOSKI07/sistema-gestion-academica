@@ -1,7 +1,11 @@
 from models.estudiante import Student
 from models.docente import Teacher
-from controllers.persona_controller import PersonaController
-from views.persona_view import PersonaView
+from controllers.menu_controller import MenuController
+from controllers.estudiante_controller import EstudianteController
+from controllers.docente_controller import DocenteController
+from views.menu_view import MenuView
+from views.estudiante_view import EstudianteView
+from views.docente_view import DocenteView
 
 
 def crear_personas_ejemplo():
@@ -64,8 +68,11 @@ def main():
     # main prepara los objetos y conecta el modelo con la vista y el controlador
     # Las preguntas quedan en la vista y las acciones se coordinan en el controlador
     personas, estudiantes, docentes = crear_personas_ejemplo()
-    vista = PersonaView()
-    controlador = PersonaController(personas, estudiantes, docentes, vista)
+    estudiantes_controller = EstudianteController(estudiantes, EstudianteView())
+    docentes_controller = DocenteController(docentes, DocenteView())
+    controlador = MenuController(
+        personas, MenuView(), estudiantes_controller, docentes_controller
+    )
     controlador.iniciar()
 
 

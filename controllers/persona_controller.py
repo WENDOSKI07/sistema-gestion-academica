@@ -1,32 +1,8 @@
 class PersonaController:
-    def __init__(self, personas, estudiantes, docentes, vista):
+    # Compartimos las operaciones que sirven para cualquier persona
+    def __init__(self, personas, vista):
         self.personas = personas
-        self.estudiantes = estudiantes
-        self.docentes = docentes
         self.vista = vista
-
-    def iniciar(self):
-        # Repetimos el menú hasta que el usuario decida salir
-        try:
-            while True:
-                opcion = self.vista.mostrar_menu()
-                if opcion == "1":
-                    self.vista.mostrar_personas(self.personas)
-                elif opcion == "2":
-                    self.actualizar_correo()
-                elif opcion == "3":
-                    self.actualizar_nombre()
-                elif opcion == "4":
-                    self.actualizar_semestre()
-                elif opcion == "5":
-                    self.actualizar_horas()
-                elif opcion == "0":
-                    self.vista.mostrar_mensaje("Hasta luego")
-                    break
-                else:
-                    self.vista.mostrar_mensaje("Opción inválida, selecciona un número del 0 al 5")
-        except (EOFError, KeyboardInterrupt):
-            self.vista.mostrar_mensaje("\nPrograma finalizado")
 
     def actualizar_correo(self):
         persona = self.seleccionar_persona(self.personas)
@@ -63,40 +39,3 @@ class PersonaController:
             self.vista.mostrar_mensaje(f"Cambio rechazado: {error}")
         else:
             self.vista.mostrar_mensaje(f"Nombre actualizado: {persona.get_name()}")
-
-    def actualizar_semestre(self):
-        estudiante = self.seleccionar_persona(self.estudiantes)
-        if estudiante is None:
-            return
-        self.vista.mostrar_mensaje(f"Semestre actual: {estudiante.get_semester()}")
-        entrada = self.vista.pedir_semestre()
-        # Primero convertimos el texto a entero y luego el modelo valida el valor
-        try:
-            semestre = int(entrada)
-        except ValueError:
-            self.vista.mostrar_mensaje("Escribe un semestre en números enteros, por ejemplo 2")
-            return
-        try:
-            estudiante.set_semester(semestre)
-        except ValueError as error:
-            self.vista.mostrar_mensaje(f"Cambio rechazado: {error}")
-        else:
-            self.vista.mostrar_mensaje(f"Semestre actualizado: {estudiante.get_semester()}")
-
-    def actualizar_horas(self):
-        docente = self.seleccionar_persona(self.docentes)
-        if docente is None:
-            return
-        self.vista.mostrar_mensaje(f"Horas actuales: {docente.get_weekly_hours()}")
-        entrada = self.vista.pedir_horas()
-        try:
-            horas = int(entrada)
-        except ValueError:
-            self.vista.mostrar_mensaje("Escribe las horas en números enteros, por ejemplo 20")
-            return
-        try:
-            docente.set_weekly_hours(horas)
-        except ValueError as error:
-            self.vista.mostrar_mensaje(f"Cambio rechazado: {error}")
-        else:
-            self.vista.mostrar_mensaje(f"Horas actualizadas: {docente.get_weekly_hours()}")
