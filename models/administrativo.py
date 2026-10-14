@@ -49,5 +49,10 @@ class Administrative(Person):
         else:
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu jornada.")
 
+    def show_info(self):
+        return f"{super().show_info()} | ID Empleado: {self.get_id_employee()} | Departamento: {self.get_deparment()} | Cargo: {self.get_possition()} | Jornada: {self.get_work_schedule()}"
+    
+    def perform_main_activity(self):
+        return f"Desempeño el cargo de {self.get_possition()} y trabajo en el departamento de {self.get_deparment()}."
     
     
