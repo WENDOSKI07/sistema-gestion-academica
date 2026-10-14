@@ -2,10 +2,11 @@ from models.persona import Person
 
 class Administrative(Person):
     
-    def __init__(self, identification, name, email, id_employee, deparment, position, work_schedule):
+    def __init__(self, identification, name, email, id_employee, deparment, possition, work_schedule):
         super().__init__(identification, name, email)
         self.set_id_employee(id_employee)
         self.set_deparment(deparment)
+        self.set_possition(possition)
         
     def get_id_employee(self):
         return self.__id_employee
@@ -25,8 +26,18 @@ class Administrative(Person):
             self.__deparment = deparment
         
         else:
-            raise ValueError("Este campo no puede estar vacío, Por favor, escribe tu dependencia.")
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu dependencia.")
         
+    def get_possition(self):
+        return (self.__position)
+    
+    def set_possition(self, possition):
+        if(possition is not None and isinstance(possition, str) and len(possition.strip()) > 0):
+            self.__possition = possition
+            
+        else:
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu cargo.")
+    
     
 
     

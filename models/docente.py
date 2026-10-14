@@ -36,7 +36,7 @@ class Teacher(Person):
             self.__employment_type = employment_type
             
         else:
-            raise ValueError("Este campo no puede estar vacío, Por favor, escribe tu tipo de contratación.")
+            raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu tipo de contratación.")
         
     def get_weekly_hours(self):
         return self.__weekly_hours
