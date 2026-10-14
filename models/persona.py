@@ -1,3 +1,6 @@
+import re
+
+
 class Person:
     
     def __init__(self, identification, name, email):
@@ -29,11 +32,16 @@ class Person:
         return self.__email
     
     def set_email(self, email):
-        if(email is not None and isinstance(email, str) and len(email.strip()) > 0):
-            self.__email = email
-            
-        else:
-            raise ValueError("Este campo no puede estar vacío. Por favor, escribe un nombre.")
+        if not isinstance(email, str) or not email.strip():
+            raise ValueError("El correo no puede estar vacío")
+
+        email = email.strip()
+        # Comprobamos un formato básico como nombre@dominio.com
+        # Esto no comprueba que la dirección exista ni que reciba mensajes
+        if not re.fullmatch(r"[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+", email):
+            raise ValueError("Escribe un correo con formato nombre@dominio.com")
+
+        self.__email = email
         
     def show_info(self):
         return f"Identificación: {self.get_identification()} | Nombre: {self.get_name()} | Email: {self.get_email()}"
