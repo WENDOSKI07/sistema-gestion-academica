@@ -1,9 +1,9 @@
 from models.estudiante import Student
+from models.docente import Teacher
 
 
 def mostrar_personas(personas):
-    # Este recorrido servirá para reunir los tres tipos de persona
-    # Por ahora lo probamos con los estudiantes que ya podemos crear
+    # Recorremos estudiantes y docentes juntos en una misma colección
     for persona in personas:
         # Aquí usamos polimorfismo porque llamamos los mismos métodos
         # y cada objeto responde según su clase sin tener que usar un if
@@ -37,6 +37,27 @@ def main():
         cumulative_GPA=3.8,
     )
 
+    # Los docentes comparten los datos de Person pero tienen sus propios datos
+    docente_1 = Teacher(
+        identification="P003",
+        name="Carlos Ruiz",
+        email="carlos@example.com",
+        id_employee="DOC001",
+        deparment="Ciencias e Ingenierías",
+        employment_type="Tiempo completo",
+        weekly_hours=40,
+    )
+
+    docente_2 = Teacher(
+        identification="P004",
+        name="Marta Gil",
+        email="marta@example.com",
+        id_employee="DOC002",
+        deparment="Ciencias Contables, Económicas y Administrativas",
+        employment_type="Medio tiempo",
+        weekly_hours=20,
+    )
+
     # Consultamos el correo mediante un método sin acceder al atributo privado
     print("Cambio válido de correo")
     print("Correo anterior:", estudiante_1.get_email())
@@ -54,10 +75,10 @@ def main():
     print("Correo después del intento:", estudiante_1.get_email())
 
     # Guardamos los objetos en una lista y la pasamos al recorrido común
-    # Faltan los docentes y administrativos para demostrar polimorfismo
-    # con una colección de distintos tipos como pide la actividad
-    personas = [estudiante_1, estudiante_2]
-    print("\nInformación y actividades de los estudiantes")
+    # Mezclamos estudiantes y docentes para demostrar el polimorfismo
+    # Faltan los dos administrativos para completar las seis personas
+    personas = [estudiante_1, docente_1, estudiante_2, docente_2]
+    print("\nInformación y actividades de las personas")
     mostrar_personas(personas)
 
 if __name__ == "__main__":
