@@ -7,6 +7,28 @@ from controllers.docente_controller import DocenteController
 from views.menu_view import MenuView
 from views.estudiante_view import EstudianteView
 from views.docente_view import DocenteView
+from models.programa_academico import AcademicProgram
+
+
+def crear_programas_ejemplo():
+    # Usamos la clase de programa académico que ya está en el modelo
+    # Cada objeto guarda su código, nombre, facultad y número de semestres
+    sistemas = AcademicProgram(
+        code="SIS",
+        name="Ingeniería de Sistemas",
+        faculty="Ciencias e Ingenierías",
+        number_semesters=10,
+    )
+
+    administracion = AcademicProgram(
+        code="ADM",
+        name="Administración de Empresas",
+        faculty="Ciencias Contables, Económicas y Administrativas",
+        number_semesters=8,
+    )
+
+    # Devolvemos los dos objetos juntos para usarlos después en el área de programas
+    return [sistemas, administracion]
 
 
 def crear_personas_ejemplo():
