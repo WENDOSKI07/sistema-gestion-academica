@@ -1,5 +1,5 @@
 class MenuController:
-    def _init_(self, personas, vista, estudiantes_controller, docentes_controller, programas_controller):
+    def __init__(self, personas, vista, estudiantes_controller, docentes_controller, programas_controller):
         self.personas = personas
         self.vista = vista
         self.estudiantes_controller = estudiantes_controller
