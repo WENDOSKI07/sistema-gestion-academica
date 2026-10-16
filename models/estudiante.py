@@ -48,8 +48,8 @@ class Student(Person):
         else:
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe tu promedio acumulado (debe ser un número entre 0.0 a 5.0).")
         
-    def show_info(self):
-        return f"{super().show_info()} | ID Estudiante: {self.get_id_student()} | Programa Académico: {self.get_academic_program()} | Semestre: {self.get_semester()} | Promedio acumulado: {self.get_cumulative_GPA()}"
+    def mostrar_informacion(self):
+        return f"{super().mostrar_informacion()} | ID Estudiante: {self.get_id_student()} | Programa Académico: {self.get_academic_program()} | Semestre: {self.get_semester()} | Promedio acumulado: {self.get_cumulative_GPA()}"
     
-    def perform_main_activity(self):
+    def realizar_actividad_principal(self):
         return f"Estudio el programa de {self.get_academic_program()} y me encuentro en el semestre {self.get_semester()}."
