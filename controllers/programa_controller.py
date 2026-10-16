@@ -1,5 +1,5 @@
 class ProgramaController:
-    def _init_(self, programas, vista):
+    def __init__(self, programas, vista):
         self.programas = programas
         self.vista = vista
 

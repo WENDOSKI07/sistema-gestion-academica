@@ -5,9 +5,11 @@ from models.programa_academico import AcademicProgram
 from controllers.menu_controller import MenuController
 from controllers.estudiante_controller import EstudianteController
 from controllers.docente_controller import DocenteController
+from controllers.programa_controller import ProgramaController
 from views.menu_view import MenuView
 from views.estudiante_view import EstudianteView
 from views.docente_view import DocenteView
+from views.programa_view import ProgramaView
 
 
 
@@ -124,11 +126,13 @@ def main():
     personas, estudiantes, docentes = crear_personas_ejemplo(programas)
     estudiantes_controller = EstudianteController(estudiantes, EstudianteView())
     docentes_controller = DocenteController(docentes, DocenteView())
+    programas_controller = ProgramaController(programas, ProgramaView())
     controlador = MenuController(
-        personas, MenuView(), estudiantes_controller, docentes_controller
+        personas, MenuView(), estudiantes_controller, docentes_controller,
+        programas_controller,
     )
     controlador.iniciar()
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
