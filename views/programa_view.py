@@ -12,7 +12,7 @@ class ProgramaView:
             print("No hay programas registrados")
             return
         for programa in programas:
-            print(programa.show_info())
+            print(programa.mostrar_informacion())
 
     def mostrar_mensaje(self, mensaje):
         print(mensaje)
