@@ -48,8 +48,8 @@ class Teacher(Person):
         else:
             raise ValueError("Este campo no puede estar vacío, Por favor, escribe tus horas semanales.")
         
-    def show_info(self):
-        return f"{super().show_info()} | ID Empleado: {self.get_id_employee()} | Departamento: {self.get_deparment()} | Tipo de Empleo: {self.get_employment_type()} | Horas Semanales: {self.get_weekly_hours()}"
+    def mostrar_informacion(self):
+        return f"{super().mostrar_informacion()} | ID Empleado: {self.get_id_employee()} | Departamento: {self.get_deparment()} | Tipo de Empleo: {self.get_employment_type()} | Horas Semanales: {self.get_weekly_hours()}"
     
-    def perform_main_activity(self):
+    def realizar_actividad_principal(self):
         return f"Oriento clases en la facultad de {self.get_deparment()}."

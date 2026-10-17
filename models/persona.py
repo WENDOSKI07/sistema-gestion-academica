@@ -50,10 +50,10 @@ class Person:
 
         self.__email = email
 
-    def show_info(self):
+    def mostrar_informacion(self):
         # Se arma una sola cadena con los datos para mostrarla en pantalla.
         return f"Identificación: {self.get_identification()} | Nombre: {self.get_name()} | Email: {self.get_email()}"
 
-    def perform_main_activity(self):
+    def realizar_actividad_principal(self):
         # Este método puede ser redefinido por clases más específicas.
         return "Realizando una actividad general de la institución."
