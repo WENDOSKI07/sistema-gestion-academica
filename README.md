@@ -98,7 +98,11 @@ La primera entrega se identificará con una etiqueta acordada por el equipo. El 
 
 ## Integrantes
 
-Pendiente de completar con los nombres de todos los integrantes del equipo.
+- Silvana Arenas
+- Kelly Martinez
+- Oscar Ricaurte
+- Stefanny Muñoz
+- Lizeth Lopez
 
 ## Conceptos de programación orientada a objetos
 
