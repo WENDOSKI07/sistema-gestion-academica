@@ -47,5 +47,5 @@ class AcademicProgram:
         else:
             raise ValueError("Este campo no puede estar vacío. El número de semestres debe ser mayor que cero.")
 
-    def show_info(self):
+    def mostrar_informacion(self):
         return f"Código: {self.get_code()} | Programa: {self.get_name()} | Facultad: {self.get_faculty()} | Semestres: {self.get_number_semesters()}"
