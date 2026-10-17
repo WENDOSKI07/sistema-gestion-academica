@@ -1,41 +1,72 @@
-class PersonaController:
-    # Compartimos las operaciones que sirven para cualquier persona
-    def __init__(self, personas, vista):
-        self.personas = personas
+class AsignaturaController:
+    def __init__(self, asignaturas, vista):
+        self.asignaturas = asignaturas
         self.vista = vista
 
-    def actualizar_correo(self):
-        persona = self.seleccionar_persona(self.personas)
-        if persona is None:
-            return
-        self.vista.mostrar_mensaje(f"Correo actual: {persona.get_email()}")
-        nuevo_correo = self.vista.pedir_correo()
-        try:
-            persona.set_email(nuevo_correo)
-        except ValueError as error:
-            self.vista.mostrar_mensaje(f"Cambio rechazado: {error}")
-        else:
-            self.vista.mostrar_mensaje(f"Correo actualizado: {persona.get_email()}")
+    def iniciar(self):
+        # Repetimos el menú hasta que el usuario decida volver
+        while True:
+            opcion = self.vista.mostrar_menu()
 
-    def seleccionar_persona(self, disponibles):
-        # Mostramos las identificaciones que se pueden usar en esta operación
-        self.vista.mostrar_opciones_personas(disponibles)
-        identificacion = self.vista.pedir_identificacion()
-        for persona in disponibles:
-            if persona.get_identification() == identificacion:
-                return persona
-        self.vista.mostrar_mensaje("No se encontró esa identificación entre las opciones disponibles")
+            if opcion == "1":
+                self.vista.mostrar_asignaturas(self.asignaturas)
+            elif opcion == "2":
+                self.actualizar_creditos()
+            elif opcion == "0":
+                return
+            else:
+                self.vista.mostrar_mensaje(
+                    "Opción inválida, selecciona 1, 2 o 0"
+                )
+
+    def seleccionar_asignatura(self):
+        if not self.asignaturas:
+            self.vista.mostrar_mensaje("No hay asignaturas registradas")
+            return None
+
+        # Mostramos los códigos para elegir una materia
+        self.vista.mostrar_opciones_asignaturas(self.asignaturas)
+        codigo = self.vista.pedir_codigo().upper()
+
+        for asignatura in self.asignaturas:
+            if asignatura.get_code().upper() == codigo:
+                return asignatura
+
+        self.vista.mostrar_mensaje(
+            "No se encontró una asignatura con ese código"
+        )
         return None
 
-    def actualizar_nombre(self):
-        persona = self.seleccionar_persona(self.personas)
-        if persona is None:
+    def actualizar_creditos(self):
+        asignatura = self.seleccionar_asignatura()
+
+        if asignatura is None:
             return
-        self.vista.mostrar_mensaje(f"Nombre actual: {persona.get_name()}")
-        nombre = self.vista.pedir_nombre()
+
+        self.vista.mostrar_mensaje(
+            f"Créditos actuales: {asignatura.get_number_credits()}"
+        )
+        entrada = self.vista.pedir_creditos()
+
+        # Convertimos el texto a entero antes de pasarlo al modelo
         try:
-            persona.set_name(nombre)
+            creditos = int(entrada)
+        except ValueError:
+            self.vista.mostrar_mensaje(
+                "Escribe un número entero de créditos, por ejemplo 3"
+            )
+            return
+
+        try:
+            # El modelo valida que los créditos sean mayores que cero
+            asignatura.set_number_credits(creditos)
         except ValueError as error:
             self.vista.mostrar_mensaje(f"Cambio rechazado: {error}")
+            self.vista.mostrar_mensaje(
+                f"Se conservan los créditos anteriores: "
+                f"{asignatura.get_number_credits()}"
+            )
         else:
-            self.vista.mostrar_mensaje(f"Nombre actualizado: {persona.get_name()}")
+            self.vista.mostrar_mensaje(
+                f"Créditos actualizados: {asignatura.get_number_credits()}"
+            )
