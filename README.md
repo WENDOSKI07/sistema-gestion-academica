@@ -43,13 +43,7 @@ git clone https://github.com/WENDOSKI07/sistema-gestion-academica.git
 cd sistema-gestion-academica
 ```
 
-Durante el desarrollo, la integración revisada está en la rama `Oscar`. Para probar esa versión:
-
-```bash
-git switch Oscar
-```
-
-Desde la carpeta del proyecto:
+El repositorio utiliza `main` como rama principal. Después de clonarlo, ejecutar desde la carpeta del proyecto:
 
 ```bash
 python main.py
@@ -92,7 +86,7 @@ Estas operaciones permiten comprobar las siete pruebas mínimas: creación de pr
 
 Cada integrante trabaja en su propia rama y registra sus aportes con commits que describen los cambios realizados. Los aportes se integran conservando su autoría y se revisan antes de preparar la entrega en `main`.
 
-La rama `main` requiere un Pull Request y una aprobación. La rama `Oscar` es de integración durante el desarrollo; tener un cambio allí no significa que ya forme parte de la versión final entregada.
+La rama `main` requiere un Pull Request y una aprobación antes de incorporar nuevos cambios.
 
 La primera entrega se identificará con una etiqueta acordada por el equipo. El nombre `Entrega_AC2` está reservado por el enunciado para la segunda actividad.
 
