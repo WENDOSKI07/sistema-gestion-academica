@@ -2,7 +2,7 @@ from models.estudiante import Student
 from models.docente import Teacher
 from models.administrativo import Administrative
 from models.programa_academico import AcademicProgram
-from models.subject import Subject
+from models.asignatura import Asignatura
 from controllers.menu_controller import MenuController
 from controllers.estudiante_controller import EstudianteController
 from controllers.docente_controller import DocenteController
@@ -40,13 +40,13 @@ def crear_programas_ejemplo():
 def crear_asignaturas_ejemplo(programas):
     sistemas, administracion = programas
     # Las materias reciben los objetos de programa que ya creamos
-    programacion = Subject(
+    programacion = Asignatura(
         code="PRO1",
         name="Programación I",
         academic_program=sistemas,
         number_credits=3,
     )
-    fundamentos = Subject(
+    fundamentos = Asignatura(
         code="FUN1",
         name="Fundamentos de Administración",
         academic_program=administracion,

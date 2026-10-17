@@ -1,7 +1,7 @@
 from models.programa_academico import AcademicProgram
 
 
-class Subject:
+class Asignatura:
     """Clase que representa una asignatura con código, nombre, programa académico y número de créditos."""
 
     def __init__(self, code, name, academic_program, number_credits):
