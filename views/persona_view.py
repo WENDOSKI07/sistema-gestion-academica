@@ -5,8 +5,8 @@ class PersonaView:
     def mostrar_personas(self, personas):
         for persona in personas:
             # Usamos los mismos métodos para estudiantes y docentes
-            print(persona.show_info())
-            print(persona.perform_main_activity())
+            print(persona.mostrar_informacion())
+            print(persona.realizar_actividad_principal())
             print()
 
     def pedir_identificacion(self):
