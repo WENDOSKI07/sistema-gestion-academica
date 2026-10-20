@@ -7,5 +7,6 @@ class MenuView(PersonaView):
         print("1. Estudiantes")
         print("2. Docentes")
         print("3. Consultar todas las personas")
+        print("4. Programas académicos")
         print("0. Salir")
         return input("Selecciona un área: ").strip()

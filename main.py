@@ -1,22 +1,50 @@
 from models.estudiante import Student
 from models.docente import Teacher
+from models.administrativo import Administrative
+from models.programa_academico import AcademicProgram
 from controllers.menu_controller import MenuController
 from controllers.estudiante_controller import EstudianteController
 from controllers.docente_controller import DocenteController
+from controllers.programa_controller import ProgramaController
 from views.menu_view import MenuView
 from views.estudiante_view import EstudianteView
 from views.docente_view import DocenteView
+from views.programa_view import ProgramaView
 
 
-def crear_personas_ejemplo():
+
+def crear_programas_ejemplo():
+    # Usamos la clase de programa académico que ya está en el modelo
+    # Cada objeto guarda su código, nombre, facultad y número de semestres
+    sistemas = AcademicProgram(
+        code="SIS",
+        name="Ingeniería de Sistemas",
+        faculty="Ciencias e Ingenierías",
+        number_semesters=10,
+    )
+
+    administracion = AcademicProgram(
+        code="ADM",
+        name="Administración de Empresas",
+        faculty="Ciencias Contables, Económicas y Administrativas",
+        number_semesters=8,
+    )
+
+    # Devolvemos los dos objetos juntos para usarlos después en el área de programas
+    return [sistemas, administracion]
+
+
+def crear_personas_ejemplo(programas):
+    sistemas, administracion = programas
     # Creamos dos estudiantes con datos ficticios usando el constructor
-    # Por ahora Student recibe el programa como texto
+    # Tomamos el nombre de los programas que ya creamos para no repetirlo
+    # Student todavía guarda ese nombre como texto, no el objeto del programa
     estudiante_1 = Student(
         identification="P001",
         name="Ana Torres",
         email="ana@example.com",
         id_student="EST001",
-        academic_program="Ingeniería de Sistemas",
+        academic_program=sistemas.get_name(),
         semester=1,
         cumulative_GPA=4.2,
     )
@@ -26,7 +54,7 @@ def crear_personas_ejemplo():
         name="Luis Rojas",
         email="luis@example.com",
         id_student="EST002",
-        academic_program="Administración de Empresas",
+        academic_program=administracion.get_name(),
         semester=2,
         cumulative_GPA=3.8,
     )
@@ -52,11 +80,37 @@ def crear_personas_ejemplo():
         weekly_hours=20,
     )
 
+    # Agregamos dos administrativos usando la clase que hizo nuestra compañera
+    administrativo_1 = Administrative(
+        identification="P005",
+        name="Laura Díaz",
+        email="laura@example.com",
+        id_employee="ADM001",
+        deparment="Registro Académico",
+        possition="Auxiliar",
+        work_schedule="Diurna",
+    )
+
+    administrativo_2 = Administrative(
+        identification="P006",
+        name="Pedro León",
+        email="pedro@example.com",
+        id_employee="ADM002",
+        deparment="Bienestar Universitario",
+        possition="Coordinador",
+        work_schedule="Diurna",
+    )
+
     estudiantes = [estudiante_1, estudiante_2]
     docentes = [docente_1, docente_2]
     # Las listas específicas apuntan a los mismos objetos del reporte general
     # Sirven para elegir a quién actualizar, el reporte sigue usando una sola lista
-    personas = [estudiante_1, docente_1, estudiante_2, docente_2]
+    # Reunimos los seis objetos para consultar sus datos y actividades
+    # con los mismos métodos sin separarlos por tipo en el reporte
+    personas = [
+        estudiante_1, docente_1, administrativo_1,
+        estudiante_2, docente_2, administrativo_2,
+    ]
     return personas, estudiantes, docentes
 
 
@@ -67,11 +121,15 @@ def main():
     # Los cambios se mantienen en memoria hasta cerrar el programa
     # main prepara los objetos y conecta el modelo con la vista y el controlador
     # Las preguntas quedan en la vista y las acciones se coordinan en el controlador
-    personas, estudiantes, docentes = crear_personas_ejemplo()
+    # Primero creamos los programas y después los usamos al preparar las personas
+    programas = crear_programas_ejemplo()
+    personas, estudiantes, docentes = crear_personas_ejemplo(programas)
     estudiantes_controller = EstudianteController(estudiantes, EstudianteView())
     docentes_controller = DocenteController(docentes, DocenteView())
+    programas_controller = ProgramaController(programas, ProgramaView())
     controlador = MenuController(
-        personas, MenuView(), estudiantes_controller, docentes_controller
+        personas, MenuView(), estudiantes_controller, docentes_controller,
+        programas_controller,
     )
     controlador.iniciar()
 
