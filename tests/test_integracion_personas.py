@@ -1,8 +1,9 @@
 import unittest
 from contextlib import redirect_stdout
 from io import StringIO
+from unittest.mock import patch
 
-from main import crear_personas_ejemplo, crear_programas_ejemplo
+from main import crear_personas_ejemplo, crear_programas_ejemplo, main
 from models.persona import Person
 from views.persona_view import PersonaView
 
@@ -38,6 +39,17 @@ class IntegracionPersonasTest(unittest.TestCase):
         with redirect_stdout(salida):
             PersonaView().mostrar_personas(self.personas)
         self.assertIn("Ana actualizada", salida.getvalue())
+
+    def test_main_permite_consultar_personas_y_volver_al_menu(self):
+        # Simulamos la entrada solo en la prueba, el programa sigue siendo interactivo
+        salida = StringIO()
+        with patch("builtins.input", side_effect=["3", "0"]) as entrada:
+            with redirect_stdout(salida):
+                main()
+        self.assertEqual(entrada.call_count, 2)
+        self.assertIn("Ana Torres", salida.getvalue())
+        self.assertIn("Pedro León", salida.getvalue())
+        self.assertIn("Hasta luego", salida.getvalue())
 
 
 if __name__ == "__main__":
