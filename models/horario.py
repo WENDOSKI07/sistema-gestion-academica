@@ -32,6 +32,9 @@ class Horario:
         
         else:
             raise ValueError("Este campo no puede estar vacío. Por favor, escribe un día válido.")
+        
+    def get_hora_inicio(self):
+        return self.__hora_inicio
     
     def set_hora_inicio(self, hora_inicio):
         if hora_inicio is not None and isinstance(hora_inicio, str) and len(hora_inicio.strip()) > 0:
@@ -44,6 +47,9 @@ class Horario:
                 raise ValueError("La hora de inicio debe tener un formato válido de 24 horas (HH:MM), por ejemplo: 07:00 o 14:30.")
         else:
             raise ValueError("La hora de inicio no puede estar vacía.")
+
+    def get_hora_fin(self):
+        return self.__hora_fin
 
     def set_hora_fin(self, hora_fin):
         if hora_fin is not None and isinstance(hora_fin, str) and len(hora_fin.strip()) > 0:
