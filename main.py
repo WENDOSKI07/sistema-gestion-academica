@@ -3,6 +3,7 @@ from models.docente import Teacher
 from models.administrativo import Administrative
 from models.programa_academico import AcademicProgram
 from models.asignatura import Asignatura
+from models.persona import Person
 from exceptions.academicas import EXCEPCIONES_ACADEMICAS
 from controllers.menu_controller import MenuController
 from controllers.estudiante_controller import EstudianteController
@@ -136,6 +137,21 @@ def crear_personas_ejemplo(programas):
     return personas, estudiantes, docentes
 
 
+def comprobar_persona_abstracta(vista):
+    # Intentamos crear la clase general para demostrar por qué usamos las clases hijas
+    try:
+        Person("PRUEBA", "Persona de prueba", "prueba@example.com")
+    except TypeError:
+        vista.mostrar_mensaje(
+            "No se puede crear una Persona directamente porque es una clase abstracta"
+        )
+        vista.mostrar_mensaje(
+            "Debes crear un estudiante, docente o administrativo que implemente realizar_actividad_principal"
+        )
+    else:
+        vista.mostrar_mensaje("Revisar el modelo Persona porque permitió crear un objeto directo")
+
+
 def main():
     # Añadimos la consola para que el usuario pueda consultar personas
     # y actualizar sus datos sin tener que modificar el código
@@ -156,6 +172,7 @@ def main():
         personas, vista, estudiantes_controller, docentes_controller,
         programas_controller,
         asignaturas_controller,
+        comprobar_persona=lambda: comprobar_persona_abstracta(vista),
     )
     # Capturamos las excepciones académicas en main como pide la segunda actividad
     # Al volver al menú reutilizamos los objetos para conservar los cambios de la sesión

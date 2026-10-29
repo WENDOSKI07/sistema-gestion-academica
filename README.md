@@ -62,6 +62,7 @@ El programa abre un menú de consola con las áreas de estudiantes, docentes, pr
 - **Estudiantes:** consultar información y actualizar nombre, correo o semestre
 - **Docentes:** consultar información y actualizar nombre, correo u horas semanales
 - **Consultar todas las personas:** mostrar los datos y las actividades de dos estudiantes, dos docentes y dos administrativos
+- **Comprobar por qué Persona es abstracta:** la opción 6 intenta crear una Persona y muestra el rechazo esperado sin cerrar el programa
 - **Programas académicos:** consultar los programas SIS y ADM, buscar por código y actualizar su número de semestres
 - **Asignaturas:** consultar las materias PRO1 y FUN1, buscar por código y actualizar el número de créditos
 - **Volver o salir:** usar la opción 0 para regresar desde un área o cerrar el programa desde el menú principal
@@ -95,6 +96,10 @@ En programas y asignaturas, la opción 3 busca por código sin distinguir mayús
 
 La integración de matrícula y retiro está pendiente del modelo de grupos académicos.
 
+Para comprobar la abstracción desde la consola, elegir 6 en el menú principal. Debe aparecer la explicación de que Persona no puede crearse directamente. Después se puede elegir 3 para consultar las clases hijas y confirmar que el programa continúa.
+
+El borrador de decisiones de la segunda actividad está en [docs/decisiones-diseno-ac2.md](docs/decisiones-diseno-ac2.md). Sus secciones pendientes deben completarse y revisarse con el código final antes de la entrega.
+
 ## Colaboración
 
 Cada integrante trabaja en su propia rama y registra sus aportes con commits que describen los cambios realizados. Los aportes se integran conservando su autoría y se revisan antes de preparar la entrega en `main`.
@@ -117,6 +122,7 @@ En las clases de personas se aplican estos conceptos:
 
 - **Encapsulamiento:** los atributos privados se consultan y modifican mediante getters y setters. El modelo rechaza datos inválidos antes de guardarlos
 - **Herencia:** `Student`, `Teacher` y `Administrative` heredan de `Person` y reutilizan su constructor para inicializar identificación, nombre y correo
+- **Abstracción:** `Person` hereda de `ABC` y declara `realizar_actividad_principal()` como abstracto. Solo se crean objetos de las clases hijas que implementan ese comportamiento
 - **Sobreescritura:** las clases hijas implementan sus propias versiones de `mostrar_informacion()` y `realizar_actividad_principal()` para presentar sus datos y actividades
 - **Polimorfismo:** la consulta general recorre una colección con los seis objetos usando un único ciclo que llama a los mismos métodos sin identificar su tipo
 

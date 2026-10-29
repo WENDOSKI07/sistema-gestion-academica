@@ -51,6 +51,16 @@ class IntegracionPersonasTest(unittest.TestCase):
         self.assertIn("Pedro León", salida.getvalue())
         self.assertIn("Hasta luego", salida.getvalue())
 
+    def test_comprobar_persona_abstracta_y_seguir_consultando(self):
+        salida = StringIO()
+        with patch("builtins.input", side_effect=["6", "3", "0"]) as entrada:
+            with redirect_stdout(salida):
+                main()
+        self.assertEqual(entrada.call_count, 3)
+        self.assertIn("No se puede crear una Persona directamente", salida.getvalue())
+        self.assertIn("Ana Torres", salida.getvalue())
+        self.assertIn("Hasta luego", salida.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main()
