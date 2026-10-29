@@ -4,6 +4,7 @@ class ProgramaView:
         print("\nÁrea de programas académicos")
         print("1. Consultar programas")
         print("2. Actualizar número de semestres")
+        print("3. Buscar programa por código")
         print("0. Volver al menú principal")
         return input("Selecciona una opción: ").strip()
 

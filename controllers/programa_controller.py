@@ -1,3 +1,6 @@
+from controllers.busquedas import buscar_programa_por_codigo
+
+
 class ProgramaController:
     def __init__(self, programas, vista):
         self.programas = programas
@@ -11,10 +14,14 @@ class ProgramaController:
                 self.vista.mostrar_programas(self.programas)
             elif opcion == "2":
                 self.actualizar_semestres()
+            elif opcion == "3":
+                programa = self.seleccionar_programa()
+                if programa is not None:
+                    self.vista.mostrar_programas([programa])
             elif opcion == "0":
                 return
             else:
-                self.vista.mostrar_mensaje("Opción inválida, selecciona 1, 2 o 0")
+                self.vista.mostrar_mensaje("Opción inválida, selecciona del 0 al 3")
 
     def seleccionar_programa(self):
         if not self.programas:
@@ -23,13 +30,9 @@ class ProgramaController:
 
         # Mostramos los códigos para que el usuario elija un programa existente
         self.vista.mostrar_opciones_programas(self.programas)
-        codigo = self.vista.pedir_codigo().upper()
-        for programa in self.programas:
-            if programa.get_code().upper() == codigo:
-                return programa
-
-        self.vista.mostrar_mensaje("No se encontró un programa con ese código")
-        return None
+        codigo = self.vista.pedir_codigo()
+        # Reutilizamos la búsqueda de Silvana y dejamos que main capture el error
+        return buscar_programa_por_codigo(self.programas, codigo)
 
     def actualizar_semestres(self):
         programa = self.seleccionar_programa()

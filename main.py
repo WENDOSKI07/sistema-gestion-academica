@@ -3,6 +3,7 @@ from models.docente import Teacher
 from models.administrativo import Administrative
 from models.programa_academico import AcademicProgram
 from models.asignatura import Asignatura
+from exceptions.academicas import EXCEPCIONES_ACADEMICAS
 from controllers.menu_controller import MenuController
 from controllers.estudiante_controller import EstudianteController
 from controllers.docente_controller import DocenteController
@@ -150,12 +151,25 @@ def main():
     docentes_controller = DocenteController(docentes, DocenteView())
     programas_controller = ProgramaController(programas, ProgramaView())
     asignaturas_controller = AsignaturaController(asignaturas, AsignaturaView())
+    vista = MenuView()
     controlador = MenuController(
-        personas, MenuView(), estudiantes_controller, docentes_controller,
+        personas, vista, estudiantes_controller, docentes_controller,
         programas_controller,
         asignaturas_controller,
     )
-    controlador.iniciar()
+    # Capturamos las excepciones académicas en main como pide la segunda actividad
+    # Al volver al menú reutilizamos los objetos para conservar los cambios de la sesión
+    while True:
+        try:
+            controlador.iniciar()
+            break
+        except EXCEPCIONES_ACADEMICAS as error:
+            vista.mostrar_mensaje(str(error))
+            vista.mostrar_mensaje("Volviendo al menú principal")
+        except (ValueError, TypeError) as error:
+            # Una búsqueda con el código vacío también debe permitir seguir usando el menú
+            vista.mostrar_mensaje(str(error))
+            vista.mostrar_mensaje("Volviendo al menú principal")
 
 
 if __name__ == "__main__":

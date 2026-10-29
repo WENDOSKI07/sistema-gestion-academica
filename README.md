@@ -20,6 +20,8 @@ sistema-gestion-academica/
 ├── models/
 ├── views/
 ├── controllers/
+├── exceptions/
+├── tests/
 ├── docs/
 ├── README.md
 └── requirements.txt
@@ -28,6 +30,8 @@ sistema-gestion-academica/
 - `models/`: entidades académicas y reglas del sistema.
 - `views/`: presentación e interfaz de usuario.
 - `controllers/`: coordinación entre las vistas y los modelos.
+- `exceptions/`: excepciones personalizadas de búsqueda y matrícula.
+- `tests/`: pruebas de búsquedas, excepciones e integración.
 - `docs/`: propuesta inicial y documentación de diseño.
 - `main.py`: punto de entrada de la aplicación.
 - `requirements.txt`: registro de las dependencias externas del proyecto.
@@ -58,8 +62,8 @@ El programa abre un menú de consola con las áreas de estudiantes, docentes, pr
 - **Estudiantes:** consultar información y actualizar nombre, correo o semestre
 - **Docentes:** consultar información y actualizar nombre, correo u horas semanales
 - **Consultar todas las personas:** mostrar los datos y las actividades de dos estudiantes, dos docentes y dos administrativos
-- **Programas académicos:** consultar los programas SIS y ADM y actualizar su número de semestres
-- **Asignaturas:** consultar las materias PRO1 y FUN1, su programa y sus créditos y actualizar el número de créditos
+- **Programas académicos:** consultar los programas SIS y ADM, buscar por código y actualizar su número de semestres
+- **Asignaturas:** consultar las materias PRO1 y FUN1, buscar por código y actualizar el número de créditos
 - **Volver o salir:** usar la opción 0 para regresar desde un área o cerrar el programa desde el menú principal
 
 Para actualizar un dato, seleccionar la opción del área e ingresar una de las identificaciones que muestra la consola. Los estudiantes de ejemplo tienen las identificaciones `P001` y `P002`; los docentes, `P003` y `P004`.
@@ -81,6 +85,15 @@ Los registros iniciales son ficticios. Las actualizaciones se mantienen en memor
 10. Probar texto, decimales y entradas vacías al pedir semestres o créditos. Debe aparecer un mensaje y el programa debe continuar sin modificar el dato
 
 Estas operaciones permiten comprobar las siete pruebas mínimas: creación de programas y asignaturas, seis personas, consulta de información, cambios válidos, al menos tres intentos inválidos, información particular y recorrido polimórfico. Las asignaturas reciben objetos AcademicProgram ya creados.
+
+## Pruebas automáticas
+
+Desde la carpeta del proyecto ejecutar `python -m unittest discover -s tests -t . -v`.
+Las pruebas simulan entradas de consola sin cambiar el funcionamiento interactivo del programa.
+
+En programas y asignaturas, la opción 3 busca por código sin distinguir mayúsculas y admite espacios alrededor. Si el código no existe o está vacío, se muestra el aviso y se vuelve al menú principal conservando los cambios de la sesión. Las excepciones se capturan en `main.py`.
+
+La integración de matrícula y retiro está pendiente del modelo de grupos académicos.
 
 ## Colaboración
 

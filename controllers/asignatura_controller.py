@@ -1,3 +1,6 @@
+from controllers.busquedas import buscar_asignatura_por_codigo
+
+
 class AsignaturaController:
     def __init__(self, asignaturas, vista):
         self.asignaturas = asignaturas
@@ -12,11 +15,15 @@ class AsignaturaController:
                 self.vista.mostrar_asignaturas(self.asignaturas)
             elif opcion == "2":
                 self.actualizar_creditos()
+            elif opcion == "3":
+                asignatura = self.seleccionar_asignatura()
+                if asignatura is not None:
+                    self.vista.mostrar_asignaturas([asignatura])
             elif opcion == "0":
                 return
             else:
                 self.vista.mostrar_mensaje(
-                    "Opción inválida, selecciona 1, 2 o 0"
+                    "Opción inválida, selecciona del 0 al 3"
                 )
 
     def seleccionar_asignatura(self):
@@ -26,16 +33,9 @@ class AsignaturaController:
 
         # Mostramos los códigos para elegir una materia
         self.vista.mostrar_opciones_asignaturas(self.asignaturas)
-        codigo = self.vista.pedir_codigo().upper()
-
-        for asignatura in self.asignaturas:
-            if asignatura.get_code().upper() == codigo:
-                return asignatura
-
-        self.vista.mostrar_mensaje(
-            "No se encontró una asignatura con ese código"
-        )
-        return None
+        codigo = self.vista.pedir_codigo()
+        # La misma búsqueda sirve para consultar y para seleccionar una actualización
+        return buscar_asignatura_por_codigo(self.asignaturas, codigo)
 
     def actualizar_creditos(self):
         asignatura = self.seleccionar_asignatura()
