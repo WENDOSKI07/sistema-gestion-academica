@@ -1,68 +1,62 @@
-from __future__ import annotations
-
-__all__ = [
-    "EXCEPCIONES_ACADEMICAS",
-    "AsignaturaInexistenteError",
-    "EstudianteDuplicadoError",
-    "EstudianteNoMatriculadoError",
-    "GrupoLlenoError",
-    "ProgramaInexistenteError",
-]
+﻿# En este archivo están las cinco excepciones del sistema
+# Las tres de matrícula las usa el grupo académico y las dos de búsqueda las usa busquedas.py
 
 
-def _como_texto(valor: object) -> str:
-    return str(valor).strip()
-
-
+# Todas heredan de Exception, así se pueden lanzar con raise y atrapar con except
 class EstudianteDuplicadoError(Exception):
-    def __init__(self, codigo_estudiantil: object, codigo_grupo: object) -> None:
-        self.codigo_estudiantil = _como_texto(codigo_estudiantil)
-        self.codigo_grupo = _como_texto(codigo_grupo)
+    # Se lanza cuando el estudiante ya está matriculado en el grupo
+    def __init__(self, codigo_estudiantil, codigo_grupo):
+        self.codigo_estudiantil = codigo_estudiantil
+        self.codigo_grupo = codigo_grupo
+        # Con super() le pasamos el mensaje a Exception para que se vea con print(error)
         super().__init__(
-            f"El estudiante con código {self.codigo_estudiantil} ya está "
-            f"matriculado en el grupo {self.codigo_grupo}."
+            f"El estudiante con código {codigo_estudiantil} ya está "
+            f"matriculado en el grupo {codigo_grupo}."
         )
 
 
 class GrupoLlenoError(Exception):
-    def __init__(self, codigo_grupo: object, capacidad_maxima: int) -> None:
-        self.codigo_grupo = _como_texto(codigo_grupo)
+    # Se lanza cuando el grupo ya llegó a su capacidad máxima
+    def __init__(self, codigo_grupo, capacidad_maxima):
+        self.codigo_grupo = codigo_grupo
         self.capacidad_maxima = capacidad_maxima
         super().__init__(
-            f"El grupo {self.codigo_grupo} alcanzó su capacidad máxima de "
-            f"{self.capacidad_maxima} estudiantes. No quedan cupos disponibles."
+            f"El grupo {codigo_grupo} alcanzó su capacidad máxima de "
+            f"{capacidad_maxima} estudiantes. No quedan cupos disponibles."
         )
 
 
 class EstudianteNoMatriculadoError(Exception):
-    def __init__(self, codigo_estudiantil: object, codigo_grupo: object) -> None:
-        self.codigo_estudiantil = _como_texto(codigo_estudiantil)
-        self.codigo_grupo = _como_texto(codigo_grupo)
+    # Se lanza cuando se quiere retirar a alguien que no está en el grupo
+    def __init__(self, codigo_estudiantil, codigo_grupo):
+        self.codigo_estudiantil = codigo_estudiantil
+        self.codigo_grupo = codigo_grupo
         super().__init__(
-            f"No se puede retirar al estudiante con código "
-            f"{self.codigo_estudiantil} porque no está matriculado en el "
-            f"grupo {self.codigo_grupo}."
+            f"No se puede retirar al estudiante con código {codigo_estudiantil} "
+            f"porque no está matriculado en el grupo {codigo_grupo}."
         )
 
 
 class AsignaturaInexistenteError(Exception):
-    def __init__(self, codigo: object) -> None:
-        self.codigo = _como_texto(codigo)
+    # Se lanza cuando se busca una asignatura con un código que no existe
+    def __init__(self, codigo):
+        self.codigo = codigo
         super().__init__(
-            f"No existe ninguna asignatura registrada con el código {self.codigo}."
+            f"No existe ninguna asignatura registrada con el código {codigo}."
         )
 
 
 class ProgramaInexistenteError(Exception):
-    def __init__(self, codigo: object) -> None:
-        self.codigo = _como_texto(codigo)
+    # Se lanza cuando se busca un programa con un código que no existe
+    def __init__(self, codigo):
+        self.codigo = codigo
         super().__init__(
-            f"No existe ningún programa académico registrado con el código "
-            f"{self.codigo}."
+            f"No existe ningún programa académico registrado con el código {codigo}."
         )
 
 
-EXCEPCIONES_ACADEMICAS: tuple[type[Exception], ...] = (
+# Las juntamos en una tupla para atraparlas todas con un solo except en main.py
+EXCEPCIONES_ACADEMICAS = (
     EstudianteDuplicadoError,
     GrupoLlenoError,
     EstudianteNoMatriculadoError,
