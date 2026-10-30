@@ -12,11 +12,11 @@ from exceptions.academicas import (
 class GrupoAcademico:
     """Clase que representa un grupo académico con código, asignatura, docente, horario y estudiantes matriculados."""
 
-    def __init__(self, code, asignatura, Teacher, capacidad_maxima,dia, hora_inicio, hora_fin, salon):
+    def __init__(self, code, asignatura, docente, capacidad_maxima,dia, hora_inicio, hora_fin, salon):
         self.set_code(code)
         self.set_asignatura(asignatura)
-        self.set_docente(Teacher)
-        self.__capacidad_maxima = capacidad_maxima
+        self.set_docente(docente)
+        self.set_capacidad_maxima(capacidad_maxima)
         self.__horario = Horario(dia, hora_inicio, hora_fin, salon)
         self.__estudiantes_matriculados = []
 
@@ -78,18 +78,19 @@ class GrupoAcademico:
         if not isinstance(estudiante, Student):
             raise ValueError("El estudiante no es válido.")
 
-        if estudiante in self.__estudiantes_matriculados:
-            raise EstudianteDuplicadoError(estudiante.get_id_student(), self.get_code())
-
+        for matriculado in self.__estudiantes_matriculados:
+            if matriculado.get_id_student() == estudiante.get_id_student():
+                raise EstudianteDuplicadoError(estudiante.get_id_student(), self.get_code())
+    
         if len(self.__estudiantes_matriculados) >= self.__capacidad_maxima:
             raise GrupoLlenoError(self.get_code(), self.get_capacidad_maxima())
 
-        self.__estudiantes_matriculados.append(Student)
+        self.__estudiantes_matriculados.append(estudiante)
     
     def retirar_estudiante(self, codigo_estudiantil):
         estudiante_a_retirar = None
         for estudiante in self.__estudiantes_matriculados:
-            if estudiante.get_identification() == codigo_estudiantil:
+            if estudiante.get_id_student() == codigo_estudiantil:
                 estudiante_a_retirar = estudiante
                 break
 
@@ -98,12 +99,13 @@ class GrupoAcademico:
 
         self.__estudiantes_matriculados.remove(estudiante_a_retirar)
 
-    def mostrar_estudiantes_matriculados(self):
-        if not self.__estudiantes_matriculados:
+    def mostrar_estudiantes(self):
+        if not self.__estudiantes:
             return "No hay estudiantes matriculados en este grupo académico."
 
         info_estudiantes = []
-        for estudiante in self.__estudiantes_matriculados:
+        for estudiante in self.__estudiantes:
             info_estudiantes.append(estudiante.mostrar_informacion())
         
         return "\n".join(info_estudiantes)
+
