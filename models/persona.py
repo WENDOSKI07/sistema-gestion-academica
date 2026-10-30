@@ -1,7 +1,8 @@
+from abc import ABC, abstractmethod
 import re
 
 
-class Person:
+class Person(ABC): # La clase ahora hereda de ABC para ser abstracta
 
     # Esta clase reúne los datos y comportamientos que tienen en común las personas.
     def __init__(self, identification, name, email):
@@ -54,6 +55,9 @@ class Person:
         # Se arma una sola cadena con los datos para mostrarla en pantalla.
         return f"Identificación: {self.get_identification()} | Nombre: {self.get_name()} | Email: {self.get_email()}"
 
+    @abstractmethod
     def realizar_actividad_principal(self):
         # Este método puede ser redefinido por clases más específicas.
-        return "Realizando una actividad general de la institución."
+        # return "Realizando una actividad general de la institución."
+        # Este método ahora es abstracto y no requiere implementación aquí
+        pass
