@@ -100,11 +100,11 @@ class GrupoAcademico:
         self.__estudiantes_matriculados.remove(estudiante_a_retirar)
 
     def mostrar_estudiantes(self):
-        if not self.__estudiantes:
+        if not self.__estudiantes_matriculados:
             return "No hay estudiantes matriculados en este grupo académico."
 
         info_estudiantes = []
-        for estudiante in self.__estudiantes:
+        for estudiante in self.__estudiantes_matriculados:
             info_estudiantes.append(estudiante.mostrar_informacion())
         
         return "\n".join(info_estudiantes)
