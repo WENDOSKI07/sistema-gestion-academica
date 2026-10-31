@@ -6,7 +6,7 @@ Proyecto colaborativo de Programación I de la Universidad de Manizales, desarro
 
 El sistema tiene como objetivo organizar la información de estudiantes, docentes, administrativos, programas académicos y asignaturas.
 
-La actividad 1 se enfoca en representar estas entidades, consultar y modificar sus datos con validaciones y demostrar herencia, sobreescritura y polimorfismo. En la actividad 2 se ampliará el mismo proyecto con grupos académicos, horarios, matrícula y retiro de estudiantes, clases abstractas y excepciones personalizadas.
+La actividad 1 representa estas entidades, permite consultar y modificar sus datos y demuestra herencia, sobreescritura y polimorfismo. La actividad 2 amplía el mismo sistema con grupos académicos, horarios, matrícula y retiro de estudiantes, clases abstractas y excepciones personalizadas.
 
 ## Organización del proyecto
 
@@ -63,6 +63,7 @@ El programa abre un menú de consola con las áreas de estudiantes, docentes, pr
 - **Docentes:** consultar información y actualizar nombre, correo u horas semanales
 - **Consultar todas las personas:** mostrar los datos y las actividades de dos estudiantes, dos docentes y dos administrativos
 - **Comprobar por qué Persona es abstracta:** la opción 6 intenta crear una Persona y muestra el rechazo esperado sin cerrar el programa
+- **Grupos académicos:** la opción 7 permite consultar grupos y matriculados, matricular y retirar usando el código estudiantil
 - **Programas académicos:** consultar los programas SIS y ADM, buscar por código y actualizar su número de semestres
 - **Asignaturas:** consultar las materias PRO1 y FUN1, buscar por código y actualizar el número de créditos
 - **Volver o salir:** usar la opción 0 para regresar desde un área o cerrar el programa desde el menú principal
@@ -94,11 +95,28 @@ Las pruebas simulan entradas de consola sin cambiar el funcionamiento interactiv
 
 En programas y asignaturas, la opción 3 busca por código sin distinguir mayúsculas y admite espacios alrededor. Si el código no existe o está vacío, se muestra el aviso y se vuelve al menú principal conservando los cambios de la sesión. Las excepciones se capturan en `main.py`.
 
-La integración de matrícula y retiro está pendiente del modelo de grupos académicos.
+### Grupos y composición
+
+El programa prepara dos grupos vacíos: G1 ofrece PRO1 con capacidad para 1 estudiante y G2 ofrece FUN1 con capacidad para 2. Cada grupo recibe los objetos de asignatura y docente existentes. La matrícula agrega el objeto Student, no solo su nombre.
+
+GrupoAcademico crea un objeto Horario dentro de su constructor. Esta relación es composición porque el horario forma parte de la organización del grupo y describe su día, horas y salón. Un grupo contiene un horario; no es un tipo de horario, así que no corresponde usar herencia. Las asignaturas, docentes y estudiantes existen de forma independiente y se comparten mediante referencias.
+
+### Comprobar matrícula y retiro
+
+1. Elegir 7 y después 1 para consultar los dos grupos y sus horarios
+2. Elegir 3, grupo G1 y estudiante EST001 para matricular a Ana
+3. Repetir la matrícula de EST001 en G1 para comprobar el error de duplicado
+4. Entrar nuevamente con 7 e intentar matricular EST002 en G1 para comprobar el cupo lleno
+5. Entrar nuevamente con 7 y elegir 2 y G1 para comprobar que Ana sigue matriculada
+6. Elegir 4, G1 y EST001 para retirar a Ana
+7. Repetir el retiro para comprobar el error de estudiante no matriculado
+8. Entrar nuevamente con 7 y matricular EST002 en G1 para comprobar que se liberó el cupo
+
+Las tres excepciones de matrícula se generan en el modelo y se capturan en main. Tras cada error se muestra un mensaje y se vuelve al menú principal. Los cambios de matrícula permanecen hasta cerrar la sesión.
 
 Para comprobar la abstracción desde la consola, elegir 6 en el menú principal. Debe aparecer la explicación de que Persona no puede crearse directamente. Después se puede elegir 3 para consultar las clases hijas y confirmar que el programa continúa.
 
-El borrador de decisiones de la segunda actividad está en [docs/decisiones-diseno-ac2.md](docs/decisiones-diseno-ac2.md). Sus secciones pendientes deben completarse y revisarse con el código final antes de la entrega.
+El documento de decisiones de la segunda actividad está en [docs/decisiones-diseno-ac2.md](docs/decisiones-diseno-ac2.md). El equipo debe revisar su contenido y completar las declaraciones de uso de IA antes de la entrega.
 
 ## Colaboración
 
@@ -106,7 +124,7 @@ Cada integrante trabaja en su propia rama y registra sus aportes con commits que
 
 La rama `main` requiere un Pull Request y una aprobación antes de incorporar nuevos cambios.
 
-La primera entrega se identificará con una etiqueta acordada por el equipo. El nombre `Entrega_AC2` está reservado por el enunciado para la segunda actividad.
+La primera entrega se conserva en la etiqueta `Entrega_AC1`. Al aprobar la segunda entrega se creará `Entrega_AC2` sobre la versión final revisada.
 
 ## Integrantes
 

@@ -4,7 +4,7 @@ Sistema de Gestión Académica · Actividad colaborativa 2
 Universidad de Manizales · Programación I  
 Integrantes: Silvana, Kelly, Oscar, Stefanny y Lizeth
 
-**Borrador parcial para revisión del equipo.** Describe los componentes integrados en Oscar. Las relaciones y operaciones de GrupoAcadémico deben completarse cuando esté disponible su implementación.
+**Versión para revisión del equipo.** Describe los componentes integrados en Oscar. Antes de la entrega cada integrante debe revisar su aporte y completar la declaración de uso de IA.
 
 ## Introducción
 
@@ -30,11 +30,15 @@ La opción 6 del menú llama a `comprobar_persona_abstracta()` en main. Allí se
 
 Las listas por área contienen referencias a los mismos objetos de la colección general. Por eso, al actualizar un estudiante desde su área, el cambio también aparece en la consulta de todas las personas.
 
-## Horarios y relaciones pendientes de integración
+## Grupos, horarios y composición
 
 `Horario`, en `models/horario.py`, almacena día, hora de inicio, hora de finalización y salón mediante atributos privados. Los setters verifican el día, el formato de las horas y que el salón tenga contenido. Los getters permiten consultar los datos y `mostrar_horario()` devuelve una descripción legible.
 
-Falta documentar sobre el código final cómo GrupoAcadémico recibe los objetos existentes de Asignatura y Docente, conserva los estudiantes y crea su Horario como parte del grupo. La relación prevista es de composición: un grupo contiene un horario que describe cuándo y dónde se desarrolla. Un grupo no es una especialización de Horario, por lo que no corresponde usar herencia. Esta decisión debe verificarse en la implementación y explicarse también en el README.
+`GrupoAcademico` recibe objetos existentes de Asignatura y Teacher. Su lista de matriculados guarda objetos Student. Estas referencias permiten consultar información actualizada sin copiar los nombres de las entidades. `crear_grupos_ejemplo()` prepara G1 y G2 desde main y los entrega a GrupoController junto con los estudiantes disponibles.
+
+El constructor de GrupoAcademico crea su propio Horario a partir del día, las horas y el salón recibidos. La relación es de composición: el horario forma parte de la organización del grupo. Un grupo contiene un horario y no es una especialización de Horario, por lo que no corresponde usar herencia. Asignaturas y docentes se reciben ya creados y pueden existir independientemente de un grupo.
+
+`GrupoView` muestra las opciones y recoge los códigos. `GrupoController` selecciona los objetos y llama a `matricular_estudiante()`, `retirar_estudiante()` y `mostrar_estudiantes()`. Las reglas de cupos y duplicados permanecen en el modelo, para que no dependan de la interfaz de consola.
 
 ## Excepciones personalizadas y búsquedas
 
@@ -44,18 +48,18 @@ Las cinco excepciones heredan de `Exception` y construyen mensajes con los códi
 
 Los controladores de programas y asignaturas usan estas funciones tanto para buscar como para seleccionar el objeto que se actualizará. Las excepciones llegan a main, donde se muestran sus mensajes y se retoma el menú. Un código vacío genera ValueError, que también se captura.
 
-`EstudianteDuplicadoError`, `GrupoLlenoError` y `EstudianteNoMatriculadoError` ya están definidas y probadas de forma aislada. Falta integrar su lanzamiento desde matrícula y retiro en GrupoAcadémico. No se considera terminada esa funcionalidad hasta comprobar las operaciones reales desde el programa principal.
+`matricular_estudiante()` compara el código estudiantil con los matriculados y lanza EstudianteDuplicadoError si ya existe. Después comprueba la capacidad y lanza GrupoLlenoError si no queda cupo. Solo agrega el estudiante cuando ambas comprobaciones se cumplen. `retirar_estudiante()` busca por código estudiantil y lanza EstudianteNoMatriculadoError si no lo encuentra. Estas excepciones pasan por el controlador hasta main, que informa el problema y permite continuar sin reconstruir los grupos.
 
 ## Verificación
 
 Las pruebas con unittest comprueban la abstracción, el recorrido polimórfico, la consulta del horario y la conservación de los datos tras cambios inválidos. Las pruebas de integración ejecutan main con entradas simuladas y verifican búsquedas correctas, códigos inexistentes, códigos vacíos y continuidad después de los errores.
 
-Quedan pendientes las pruebas de al menos dos grupos, matrícula correcta, duplicados, capacidad máxima, retiro correcto y retiro de un estudiante no matriculado. También falta mostrar los horarios de los grupos desde la aplicación.
+Las pruebas de integración también ejecutan el área de grupos desde main con entradas simuladas. Comprueban los dos grupos y sus horarios, la matrícula y el retiro correctos, los tres errores de matrícula y la continuidad posterior. Tras una excepción verifican que se conserva la matrícula anterior y que un retiro libera el cupo. Otra prueba comprueba que los grupos conservan las referencias a los objetos originales y que tienen horarios distintos. Las pruebas no se ejecutan automáticamente al abrir la aplicación.
 
 ## Uso de inteligencia artificial
 
 Se utilizó ChatGPT/Codex para apoyar la interpretación de requisitos, revisar código, generar y ajustar bloques de integración, pruebas y documentación. Steffany declaró apoyo de IA para comprender abc y las expresiones regulares de Horario. Silvana declaró el uso de Claude de Anthropic como apoyo para escribir el código de excepciones y búsquedas. El equipo debe completar esta declaración con los usos de las demás integrantes y revisar y comprender el contenido antes de entregar.
 
-## Conclusiones parciales
+## Conclusiones
 
-La integración actual conserva el sistema anterior y permite incorporar nuevas reglas sin duplicar las entidades. La abstracción mantiene las actividades específicas de cada rol y las búsquedas comunican los errores sin finalizar el programa. La entrega requiere completar los grupos, la composición y las operaciones de matrícula y retiro, actualizar este documento con el resultado y verificar todos los casos solicitados.
+La integración conserva el sistema anterior y permite incorporar grupos sin duplicar las entidades académicas. La abstracción mantiene las actividades específicas de cada rol, la composición organiza el horario del grupo y las excepciones comunican los problemas sin finalizar el programa. La separación entre modelo, vista y controlador permite probar las reglas y la interacción por consola. Los datos se mantienen en memoria, por lo que no se conservan al cerrar la aplicación.
