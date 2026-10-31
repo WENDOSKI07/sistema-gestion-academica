@@ -58,7 +58,13 @@ Las pruebas de integración también ejecutan el área de grupos desde main con 
 
 ## Uso de inteligencia artificial
 
-Se utilizó ChatGPT/Codex para apoyar la interpretación de requisitos, revisar código, generar y ajustar bloques de integración, pruebas y documentación. Steffany declaró apoyo de IA para comprender abc y las expresiones regulares de Horario. Silvana declaró el uso de Claude de Anthropic como apoyo para escribir el código de excepciones y búsquedas. El equipo debe completar esta declaración con los usos de las demás integrantes y revisar y comprender el contenido antes de entregar.
+Durante el desarrollo utilizamos ChatGPT/Codex y Claude de Anthropic como herramientas de apoyo para comprender los requisitos y conceptos de programación orientada a objetos, organizar las tareas, revisar errores y preparar documentación. También se usó ChatGPT/Codex para generar y ajustar bloques de código de la interfaz de consola y de la integración de los componentes.
+
+Las pruebas unitarias y de integración incorporadas en la carpeta `tests/` fueron generadas con apoyo de inteligencia artificial. ChatGPT/Codex escribió las pruebas de personas, horarios, grupos y navegación por consola, y las ejecutó para comprobar los resultados. Estas pruebas permitieron detectar errores como los getters faltantes de Horario y las validaciones de capacidad de GrupoAcademico. Las correcciones de capacidad y sus pruebas también se elaboraron con esta herramienta. Silvana declaró el uso de Claude para escribir su código de excepciones y búsquedas y compartió las pruebas que acompañan ese aporte.
+
+Steffany declaró apoyo de IA para comprender el módulo abc y preparar las expresiones regulares de Horario. Stefania utilizó inteligencia artificial como apoyo para desarrollar la vista y el controlador de grupos académicos, organizar el menú de consola y comprender cómo conectar las consultas, la matrícula y el retiro con el modelo. Este apoyo incluyó la generación de los bloques de código de ambos archivos.
+
+El uso de estas herramientas no sustituye la responsabilidad de cada integrante de revisar, comprender y poder explicar el código, las pruebas y las decisiones de diseño que incorpora a la entrega. Antes de entregar, cada integrante debe confirmar que esta declaración refleje el uso realizado y completar cualquier apoyo adicional que no esté registrado aquí.
 
 ## Conclusiones
 

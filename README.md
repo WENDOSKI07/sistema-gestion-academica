@@ -4,7 +4,7 @@ Proyecto colaborativo de Programación I de la Universidad de Manizales, desarro
 
 ## Descripción
 
-El sistema tiene como objetivo organizar la información de estudiantes, docentes, administrativos, programas académicos y asignaturas.
+El sistema organiza la información de estudiantes, docentes, administrativos, programas académicos, asignaturas y grupos con sus horarios y matrículas.
 
 La actividad 1 representa estas entidades, permite consultar y modificar sus datos y demuestra herencia, sobreescritura y polimorfismo. La actividad 2 amplía el mismo sistema con grupos académicos, horarios, matrícula y retiro de estudiantes, clases abstractas y excepciones personalizadas.
 
@@ -55,7 +55,7 @@ python main.py
 
 En Windows también se puede utilizar `py main.py` si Python está disponible mediante el lanzador `py`.
 
-El programa abre un menú de consola con las áreas de estudiantes, docentes, programas académicos y asignaturas y una opción para consultar todas las personas. Las operaciones se seleccionan desde el menú, sin un modo de demostración automática.
+El programa abre un menú de consola con Personas, Programas académicos, Asignaturas, Grupos y matrículas y una sección de prueba de diseño para la actividad. Las operaciones se seleccionan desde el menú, sin un modo de demostración automática.
 
 ## Uso del menú
 
@@ -88,7 +88,7 @@ Los registros iniciales son ficticios. Las actualizaciones se mantienen en memor
 9. En asignaturas consultar PRO1 y FUN1. Actualizar PRO1 de 3 a 4 créditos, intentar después 0 y -2 y consultar para comprobar que conserva 4
 10. Probar texto, decimales y entradas vacías al pedir semestres o créditos. Debe aparecer un mensaje y el programa debe continuar sin modificar el dato
 
-Estas operaciones permiten comprobar las siete pruebas mínimas: creación de programas y asignaturas, seis personas, consulta de información, cambios válidos, al menos tres intentos inválidos, información particular y recorrido polimórfico. Las asignaturas reciben objetos AcademicProgram ya creados.
+Estas operaciones conservan las comprobaciones de la primera actividad: creación de programas y asignaturas, seis personas, consulta de información, cambios válidos, intentos inválidos, información particular y recorrido polimórfico. Las asignaturas reciben objetos AcademicProgram ya creados.
 
 ## Pruebas automáticas
 
@@ -113,6 +113,8 @@ GrupoAcademico crea un objeto Horario dentro de su constructor. Esta relación e
 6. Elegir 4, G1 y EST001 para retirar a Ana
 7. Repetir el retiro para comprobar el error de estudiante no matriculado
 8. Entrar nuevamente con 4 y matricular EST002 en G1 para comprobar que se liberó el cupo
+
+Después de cada consulta, presionar Enter para volver al submenú. Para comprobar las dos excepciones de búsqueda, entrar a Programas académicos (2) o Asignaturas (3), seleccionar buscar por código (3) e ingresar NO_EXISTE. En ambos casos debe aparecer el mensaje y volver al menú principal sin cerrar el programa.
 
 Las tres excepciones de matrícula se generan en el modelo y se capturan en main. Tras cada error se muestra un mensaje y se vuelve al menú principal. Los cambios de matrícula permanecen hasta cerrar la sesión.
 
@@ -150,6 +152,6 @@ La consulta general utiliza los nombres solicitados en el enunciado y llama ambo
 
 ## Uso de inteligencia artificial
 
-Se utilizó ChatGPT/Codex como apoyo para interpretar los requisitos, preparar la propuesta de diseño y la estructura inicial, generar y revisar bloques de integración y de interacción por consola, corregir errores y elaborar documentación. También se utilizó Claude como apoyo para proponer la distribución de tareas.
+Se utilizó inteligencia artificial como apoyo para interpretar requisitos, organizar tareas, generar y revisar bloques de código de consola e integración, corregir errores y elaborar documentación. También se utilizó para generar las pruebas unitarias y de integración y comprobar sus resultados.
 
-El uso de esta herramienta se declara de acuerdo con las orientaciones de la actividad. Cada integrante es responsable de revisar, comprender y poder explicar los aportes que incorpore al proyecto. Se registrarán aquí los usos adicionales durante el desarrollo.
+El detalle de las herramientas y de los aportes asistidos está registrado en la sección Uso de inteligencia artificial del [Documento de Decisiones de Diseño](docs/decisiones-diseno-ac2.md). Cada integrante es responsable de revisar, comprender y poder explicar los aportes que incorpore al proyecto.
