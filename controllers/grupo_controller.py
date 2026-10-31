@@ -10,10 +10,12 @@ class GrupoController:
             opcion = self.vista.mostrar_menu()
             if opcion == "1":
                 self.vista.mostrar_grupos(self.grupos)
+                self.vista.esperar_continuar()
             elif opcion == "2":
                 grupo = self.seleccionar_grupo()
                 if grupo is not None:
                     self.vista.mostrar_estudiantes(grupo)
+                    self.vista.esperar_continuar()
             elif opcion == "3":
                 self.matricular_estudiante()
             elif opcion == "4":

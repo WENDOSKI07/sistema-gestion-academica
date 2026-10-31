@@ -27,3 +27,6 @@ class ProgramaView:
 
     def pedir_semestres(self):
         return input("Nuevo número de semestres: ").strip()
+
+    def esperar_continuar(self):
+        input("\nPresiona Enter para volver: ")

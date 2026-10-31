@@ -13,12 +13,14 @@ class AsignaturaController:
 
             if opcion == "1":
                 self.vista.mostrar_asignaturas(self.asignaturas)
+                self.vista.esperar_continuar()
             elif opcion == "2":
                 self.actualizar_creditos()
             elif opcion == "3":
                 asignatura = self.seleccionar_asignatura()
                 if asignatura is not None:
                     self.vista.mostrar_asignaturas([asignatura])
+                    self.vista.esperar_continuar()
             elif opcion == "0":
                 return
             else:

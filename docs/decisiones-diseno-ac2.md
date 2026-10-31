@@ -22,7 +22,7 @@ Los datos se mantienen en memoria durante la sesión. Cuando una búsqueda falla
 
 `Student`, `Teacher` y `Administrative` conservan los datos comunes y aportan su propia implementación de la actividad. El estudiante describe su actividad académica, el docente la enseñanza en su departamento y el administrativo su trabajo según su cargo y dependencia. La información particular también se presenta mediante la sobreescritura de `mostrar_informacion()`.
 
-La opción 6 del menú llama a `comprobar_persona_abstracta()` en main. Allí se intenta crear un objeto de Person y se captura el TypeError esperado, mostrando una explicación antes de continuar. Esta comprobación se ejecuta cuando el usuario la selecciona.
+La opción 1 de Prueba de diseño para la actividad, accesible desde la opción 5 del menú principal, llama a `comprobar_persona_abstracta()` en main. Allí se intenta crear un objeto de Person y se captura el TypeError esperado, mostrando una explicación antes de continuar. Esta comprobación se ejecuta cuando el usuario la selecciona.
 
 ## Conservación del polimorfismo
 

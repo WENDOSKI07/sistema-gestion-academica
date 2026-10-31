@@ -59,11 +59,13 @@ El programa abre un menú de consola con las áreas de estudiantes, docentes, pr
 
 ## Uso del menú
 
+El menú principal reúne Personas (1), Programas académicos (2), Asignaturas (3), Grupos y matrículas (4) y Prueba de diseño para la actividad (5). Dentro de Personas se accede a estudiantes, docentes y la consulta general. La opción 0 vuelve al menú anterior. Después de una consulta se presiona Enter para continuar leyendo y volver al menú.
+
 - **Estudiantes:** consultar información y actualizar nombre, correo o semestre
 - **Docentes:** consultar información y actualizar nombre, correo u horas semanales
 - **Consultar todas las personas:** mostrar los datos y las actividades de dos estudiantes, dos docentes y dos administrativos
-- **Comprobar por qué Persona es abstracta:** la opción 6 intenta crear una Persona y muestra el rechazo esperado sin cerrar el programa
-- **Grupos académicos:** la opción 7 permite consultar grupos y matriculados, matricular y retirar usando el código estudiantil
+- **Demostrar que Persona es abstracta:** en la opción 5 y después 1 se intenta crear una Persona y muestra el rechazo esperado sin cerrar el programa
+- **Grupos académicos:** la opción 4 permite consultar grupos y matriculados, matricular y retirar usando el código estudiantil
 - **Programas académicos:** consultar los programas SIS y ADM, buscar por código y actualizar su número de semestres
 - **Asignaturas:** consultar las materias PRO1 y FUN1, buscar por código y actualizar el número de créditos
 - **Volver o salir:** usar la opción 0 para regresar desde un área o cerrar el programa desde el menú principal
@@ -103,18 +105,18 @@ GrupoAcademico crea un objeto Horario dentro de su constructor. Esta relación e
 
 ### Comprobar matrícula y retiro
 
-1. Elegir 7 y después 1 para consultar los dos grupos y sus horarios
+1. Elegir 4 y después 1 para consultar los dos grupos y sus horarios
 2. Elegir 3, grupo G1 y estudiante EST001 para matricular a Ana
 3. Repetir la matrícula de EST001 en G1 para comprobar el error de duplicado
-4. Entrar nuevamente con 7 e intentar matricular EST002 en G1 para comprobar el cupo lleno
-5. Entrar nuevamente con 7 y elegir 2 y G1 para comprobar que Ana sigue matriculada
+4. Entrar nuevamente con 4 e intentar matricular EST002 en G1 para comprobar el cupo lleno
+5. Entrar nuevamente con 4 y elegir 2 y G1 para comprobar que Ana sigue matriculada
 6. Elegir 4, G1 y EST001 para retirar a Ana
 7. Repetir el retiro para comprobar el error de estudiante no matriculado
-8. Entrar nuevamente con 7 y matricular EST002 en G1 para comprobar que se liberó el cupo
+8. Entrar nuevamente con 4 y matricular EST002 en G1 para comprobar que se liberó el cupo
 
 Las tres excepciones de matrícula se generan en el modelo y se capturan en main. Tras cada error se muestra un mensaje y se vuelve al menú principal. Los cambios de matrícula permanecen hasta cerrar la sesión.
 
-Para comprobar la abstracción desde la consola, elegir 6 en el menú principal. Debe aparecer la explicación de que Persona no puede crearse directamente. Después se puede elegir 3 para consultar las clases hijas y confirmar que el programa continúa.
+Para comprobar la abstracción desde la consola, elegir 5 y después 1 en el menú principal. Debe aparecer la explicación de que Persona no puede crearse directamente. Después se puede volver al menú principal, elegir 1 y después 3 para consultar las clases hijas y confirmar que el programa continúa.
 
 El documento de decisiones de la segunda actividad está en [docs/decisiones-diseno-ac2.md](docs/decisiones-diseno-ac2.md). El equipo debe revisar su contenido y completar las declaraciones de uso de IA antes de la entrega.
 

@@ -43,21 +43,24 @@ class IntegracionPersonasTest(unittest.TestCase):
     def test_main_permite_consultar_personas_y_volver_al_menu(self):
         # Simulamos la entrada solo en la prueba, el programa sigue siendo interactivo
         salida = StringIO()
-        with patch("builtins.input", side_effect=["3", "0"]) as entrada:
+        with patch("builtins.input", side_effect=["1", "3", "", "0", "0"]) as entrada:
             with redirect_stdout(salida):
                 main()
-        self.assertEqual(entrada.call_count, 2)
+        self.assertEqual(entrada.call_count, 5)
         self.assertIn("Ana Torres", salida.getvalue())
         self.assertIn("Pedro León", salida.getvalue())
         self.assertIn("Hasta luego", salida.getvalue())
 
     def test_comprobar_persona_abstracta_y_seguir_consultando(self):
         salida = StringIO()
-        with patch("builtins.input", side_effect=["6", "3", "0"]) as entrada:
+        with patch("builtins.input", side_effect=["5", "1", "", "0", "1", "3", "", "0", "0"]) as entrada:
             with redirect_stdout(salida):
                 main()
-        self.assertEqual(entrada.call_count, 3)
+        self.assertEqual(entrada.call_count, 9)
         self.assertIn("No se puede crear una Persona directamente", salida.getvalue())
+        self.assertIn('Intento: Person("PRUEBA"', salida.getvalue())
+        self.assertIn("Resultado esperado: Python lanza TypeError", salida.getvalue())
+        self.assertIn("La comprobación terminó correctamente", salida.getvalue())
         self.assertIn("Ana Torres", salida.getvalue())
         self.assertIn("Hasta luego", salida.getvalue())
 

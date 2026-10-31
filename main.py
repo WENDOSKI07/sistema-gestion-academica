@@ -157,15 +157,23 @@ def crear_grupos_ejemplo(asignaturas, docentes):
 
 def comprobar_persona_abstracta(vista):
     # Intentamos crear la clase general para demostrar por qué usamos las clases hijas
+    vista.mostrar_mensaje("\nDemostración de Persona abstracta")
+    vista.mostrar_mensaje("La actividad pide comprobar que no se pueda crear un objeto de Persona directamente")
+    vista.mostrar_mensaje('Intento: Person("PRUEBA", "Persona de prueba", "prueba@example.com")')
     try:
         Person("PRUEBA", "Persona de prueba", "prueba@example.com")
     except TypeError:
         vista.mostrar_mensaje(
-            "No se puede crear una Persona directamente porque es una clase abstracta"
+            "Resultado esperado: Python lanza TypeError. No se puede crear una Persona directamente"
         )
         vista.mostrar_mensaje(
-            "Debes crear un estudiante, docente o administrativo que implemente realizar_actividad_principal"
+            "Persona es una clase abstracta: reúne los datos comunes pero no representa un rol concreto"
         )
+        vista.mostrar_mensaje(
+            "Estudiante, docente y administrativo sí pueden crearse porque cada uno define su actividad"
+        )
+        vista.mostrar_mensaje("La comprobación terminó correctamente y no se agregó ningún registro")
+        vista.mostrar_mensaje("Puedes consultar los objetos de las clases hijas en Personas > Consultar todas las personas")
     else:
         vista.mostrar_mensaje("Revisar el modelo Persona porque permitió crear un objeto directo")
 

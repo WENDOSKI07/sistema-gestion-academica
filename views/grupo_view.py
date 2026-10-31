@@ -39,3 +39,6 @@ class GrupoView:
 
     def mostrar_mensaje(self, mensaje):
         print(mensaje)
+
+    def esperar_continuar(self):
+        input("\nPresiona Enter para volver: ")

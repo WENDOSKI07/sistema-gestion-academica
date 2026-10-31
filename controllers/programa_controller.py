@@ -12,12 +12,14 @@ class ProgramaController:
             opcion = self.vista.mostrar_menu()
             if opcion == "1":
                 self.vista.mostrar_programas(self.programas)
+                self.vista.esperar_continuar()
             elif opcion == "2":
                 self.actualizar_semestres()
             elif opcion == "3":
                 programa = self.seleccionar_programa()
                 if programa is not None:
                     self.vista.mostrar_programas([programa])
+                    self.vista.esperar_continuar()
             elif opcion == "0":
                 return
             else:
