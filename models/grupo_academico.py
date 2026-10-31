@@ -16,9 +16,9 @@ class GrupoAcademico:
         self.set_code(code)
         self.set_asignatura(asignatura)
         self.set_docente(docente)
+        self.__estudiantes_matriculados = []
         self.set_capacidad_maxima(capacidad_maxima)
         self.__horario = Horario(dia, hora_inicio, hora_fin, salon)
-        self.__estudiantes_matriculados = []
 
     def get_code(self):
         return self.__code
@@ -49,10 +49,15 @@ class GrupoAcademico:
             raise ValueError("El docente seleccionado no existe. Selecciona un docente válido.")
 
     def set_capacidad_maxima(self, capacidad_maxima):
-        if isinstance(capacidad_maxima, int) and capacidad_maxima > 0:
-            self.__capacidad_maxima = capacidad_maxima
-        else:
+        # True y False también cuentan como enteros en Python pero no son cupos válidos
+        if isinstance(capacidad_maxima, bool) or not isinstance(capacidad_maxima, int) or capacidad_maxima <= 0:
             raise ValueError("La capacidad máxima debe ser un número entero positivo.")
+
+        # No podemos dejar menos cupos que los que ya están ocupados
+        if capacidad_maxima < len(self.__estudiantes_matriculados):
+            raise ValueError("La capacidad máxima no puede ser menor que los estudiantes matriculados.")
+
+        self.__capacidad_maxima = capacidad_maxima
 
     def get_capacidad_maxima(self):
         return self.__capacidad_maxima
