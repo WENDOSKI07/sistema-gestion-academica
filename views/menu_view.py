@@ -10,5 +10,6 @@ class MenuView(PersonaView):
         print("4. Programas académicos")
         print("5. Asignaturas")
         print("6. Comprobar por qué Persona es abstracta")
+        print("7. Grupos académicos")
         print("0. Salir")
         return input("Selecciona un área: ").strip()

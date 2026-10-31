@@ -1,5 +1,5 @@
 class MenuController:
-    def __init__(self, personas, vista, estudiantes_controller, docentes_controller, programas_controller, asignaturas_controller, comprobar_persona=None):
+    def __init__(self, personas, vista, estudiantes_controller, docentes_controller, programas_controller, asignaturas_controller, comprobar_persona=None, grupos_controller=None):
         self.personas = personas
         self.vista = vista
         self.estudiantes_controller = estudiantes_controller
@@ -7,6 +7,7 @@ class MenuController:
         self.programas_controller = programas_controller
         self.asignaturas_controller = asignaturas_controller
         self.comprobar_persona = comprobar_persona
+        self.grupos_controller = grupos_controller
 
     def iniciar(self):
         # El menú principal dirige a cada área sin manejar sus actualizaciones
@@ -28,10 +29,13 @@ class MenuController:
                     # main prepara esta comprobación y aquí solo la ejecutamos
                     if self.comprobar_persona is not None:
                         self.comprobar_persona()
+                elif opcion == "7":
+                    if self.grupos_controller is not None:
+                        self.grupos_controller.iniciar()
                 elif opcion == "0":
                     self.vista.mostrar_mensaje("Hasta luego")
                     return
                 else:
-                    self.vista.mostrar_mensaje("Opción inválida, selecciona del 0 al 6")
+                    self.vista.mostrar_mensaje("Opción inválida, selecciona del 0 al 7")
         except (EOFError, KeyboardInterrupt):
             self.vista.mostrar_mensaje("\nPrograma finalizado")
