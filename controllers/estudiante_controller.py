@@ -8,6 +8,7 @@ class EstudianteController(PersonaController):
             opcion = self.vista.mostrar_menu()
             if opcion == "1":
                 self.vista.mostrar_personas(self.personas)
+                self.vista.esperar_continuar()
             elif opcion == "2":
                 self.actualizar_correo()
             elif opcion == "3":

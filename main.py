@@ -3,6 +3,11 @@ from models.docente import Teacher
 from models.administrativo import Administrative
 from models.programa_academico import AcademicProgram
 from models.asignatura import Asignatura
+from models.persona import Person
+from models.grupo_academico import GrupoAcademico
+from controllers.grupo_controller import GrupoController
+from views.grupo_view import GrupoView
+from exceptions.academicas import EXCEPCIONES_ACADEMICAS
 from controllers.menu_controller import MenuController
 from controllers.estudiante_controller import EstudianteController
 from controllers.docente_controller import DocenteController
@@ -135,6 +140,44 @@ def crear_personas_ejemplo(programas):
     return personas, estudiantes, docentes
 
 
+def crear_grupos_ejemplo(asignaturas, docentes):
+    # Pasamos los mismos objetos de asignatura y docente que usan las otras áreas
+    # Cada grupo crea su horario dentro del constructor para representar la composición
+    grupo_1 = GrupoAcademico(
+        "G1", asignaturas[0], docentes[0], 1,
+        "lunes", "07:00", "09:00", "101",
+    )
+    grupo_2 = GrupoAcademico(
+        "G2", asignaturas[1], docentes[1], 2,
+        "martes", "10:00", "12:00", "102",
+    )
+    # Dejamos los grupos vacíos para que el usuario realice la matrícula desde el menú
+    return [grupo_1, grupo_2]
+
+
+def comprobar_persona_abstracta(vista):
+    # Intentamos crear la clase general para demostrar por qué usamos las clases hijas
+    vista.mostrar_mensaje("\nDemostración de Persona abstracta")
+    vista.mostrar_mensaje("La actividad pide comprobar que no se pueda crear un objeto de Persona directamente")
+    vista.mostrar_mensaje('Intento: Person("PRUEBA", "Persona de prueba", "prueba@example.com")')
+    try:
+        Person("PRUEBA", "Persona de prueba", "prueba@example.com")
+    except TypeError:
+        vista.mostrar_mensaje(
+            "Resultado esperado: Python lanza TypeError. No se puede crear una Persona directamente"
+        )
+        vista.mostrar_mensaje(
+            "Persona es una clase abstracta: reúne los datos comunes pero no representa un rol concreto"
+        )
+        vista.mostrar_mensaje(
+            "Estudiante, docente y administrativo sí pueden crearse porque cada uno define su actividad"
+        )
+        vista.mostrar_mensaje("La comprobación terminó correctamente y no se agregó ningún registro")
+        vista.mostrar_mensaje("Puedes consultar los objetos de las clases hijas en Personas > Consultar todas las personas")
+    else:
+        vista.mostrar_mensaje("Revisar el modelo Persona porque permitió crear un objeto directo")
+
+
 def main():
     # Añadimos la consola para que el usuario pueda consultar personas
     # y actualizar sus datos sin tener que modificar el código
@@ -146,16 +189,33 @@ def main():
     programas = crear_programas_ejemplo()
     asignaturas = crear_asignaturas_ejemplo(programas)
     personas, estudiantes, docentes = crear_personas_ejemplo(programas)
+    grupos = crear_grupos_ejemplo(asignaturas, docentes)
+    grupos_controller = GrupoController(grupos, estudiantes, GrupoView())
     estudiantes_controller = EstudianteController(estudiantes, EstudianteView())
     docentes_controller = DocenteController(docentes, DocenteView())
     programas_controller = ProgramaController(programas, ProgramaView())
     asignaturas_controller = AsignaturaController(asignaturas, AsignaturaView())
+    vista = MenuView()
     controlador = MenuController(
-        personas, MenuView(), estudiantes_controller, docentes_controller,
+        personas, vista, estudiantes_controller, docentes_controller,
         programas_controller,
         asignaturas_controller,
+        comprobar_persona=lambda: comprobar_persona_abstracta(vista),
+        grupos_controller=grupos_controller,
     )
-    controlador.iniciar()
+    # Capturamos las excepciones académicas en main como pide la segunda actividad
+    # Al volver al menú reutilizamos los objetos para conservar los cambios de la sesión
+    while True:
+        try:
+            controlador.iniciar()
+            break
+        except EXCEPCIONES_ACADEMICAS as error:
+            vista.mostrar_mensaje(str(error))
+            vista.mostrar_mensaje("Volviendo al menú principal")
+        except (ValueError, TypeError) as error:
+            # Una búsqueda con el código vacío también debe permitir seguir usando el menú
+            vista.mostrar_mensaje(str(error))
+            vista.mostrar_mensaje("Volviendo al menú principal")
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ class AsignaturaView:
         print("\nÁrea de asignaturas")
         print("1. Consultar asignaturas")
         print("2. Actualizar créditos")
+        print("3. Buscar asignatura por código")
         print("0. Volver al menú principal")
         return input("Selecciona una opción: ").strip()
 
@@ -25,3 +26,6 @@ class AsignaturaView:
 
     def mostrar_mensaje(self, mensaje):
         print(mensaje)
+
+    def esperar_continuar(self):
+        input("\nPresiona Enter para volver: ")

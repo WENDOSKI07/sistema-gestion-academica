@@ -4,6 +4,7 @@ class ProgramaView:
         print("\nÁrea de programas académicos")
         print("1. Consultar programas")
         print("2. Actualizar número de semestres")
+        print("3. Buscar programa por código")
         print("0. Volver al menú principal")
         return input("Selecciona una opción: ").strip()
 
@@ -26,3 +27,6 @@ class ProgramaView:
 
     def pedir_semestres(self):
         return input("Nuevo número de semestres: ").strip()
+
+    def esperar_continuar(self):
+        input("\nPresiona Enter para volver: ")
