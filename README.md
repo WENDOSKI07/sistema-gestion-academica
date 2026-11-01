@@ -120,7 +120,7 @@ Las tres excepciones de matrícula se generan en el modelo y se capturan en main
 
 Para comprobar la abstracción desde la consola, elegir 5 y después 1 en el menú principal. Debe aparecer la explicación de que Persona no puede crearse directamente. Después se puede volver al menú principal, elegir 1 y después 3 para consultar las clases hijas y confirmar que el programa continúa.
 
-El documento de decisiones de la segunda actividad está en [docs/decisiones-diseno-ac2.md](docs/decisiones-diseno-ac2.md). El equipo debe revisar su contenido y completar las declaraciones de uso de IA antes de la entrega.
+El Documento de Decisiones de Diseño está disponible en [PDF](<docs/Documento de Decisiones de Diseño AC2.pdf>) y en [Word](<docs/Documento de Decisiones de Diseño AC2.docx>), con portada y la declaración de uso de inteligencia artificial. La [versión en Markdown](docs/decisiones-diseno-ac2.md) conserva el contenido editable dentro del repositorio. El equipo debe revisar el documento antes de entregar.
 
 ## Colaboración
 
@@ -132,11 +132,11 @@ La primera entrega se conserva en la etiqueta `Entrega_AC1`. Al aprobar la segun
 
 ## Integrantes
 
-- Silvana Arenas
-- Kelly Martinez
-- Oscar Ricaurte
-- Stefanny Muñoz
-- Lizeth Lopez
+- Silvana Arenas Molina
+- Kelly Stefania Martinez Martinez
+- Oscar Ricaurte Salamanca
+- Stefanny Muñoz Gasca
+- Lizeth Lopez Blanco
 
 ## Conceptos de programación orientada a objetos
 
